@@ -1,0 +1,3 @@
+C:/Users/Biagio Scaglia/Desktop/berserk/cmake-build-debug/CMakeFiles/berserk.dir
+C:/Users/Biagio Scaglia/Desktop/berserk/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Biagio Scaglia/Desktop/berserk/cmake-build-debug/CMakeFiles/rebuild_cache.dir
