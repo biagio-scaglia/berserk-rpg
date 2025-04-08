@@ -43,7 +43,7 @@ int main() {
 
         introduzione();
 
-        Personaggio guts = {"Guts", 100, 30, 5};
+        Personaggio guts = {"Guts", 100, 45, 15};
 
         for (int i = 0; i < nemici_extra; i++) {
             Personaggio nemico_extra = crea_apostolo(potenziato);
