@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BERSERK: L’Oscurità Avanza - Documentazione</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      color: #f4f4f4;
+      font-family: 'Roboto Mono', monospace;
+      line-height: 1.7;
+    }
+    header {
+      background: #1a1a1a;
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 2px solid crimson;
+    }
+    header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5em;
+      color: crimson;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #111;
+      border-bottom: 1px solid crimson;
+    }
+    nav a {
+      color: #f4f4f4;
+      padding: 15px 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background: crimson;
+      color: #fff;
+    }
+    main {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    h2 {
+      font-family: 'Cinzel', serif;
+      color: crimson;
+      border-left: 5px solid crimson;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+    p, li {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    pre {
+      background: #111;
+      color: #0f0;
+      padding: 20px;
+      overflow-x: auto;
+      border: 1px solid crimson;
+    }
+    ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+    .cta {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .cta a {
+      background: crimson;
+      color: #fff;
+      padding: 15px 30px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .cta a:hover {
+      background: #b0001a;
+    }
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #666;
+      border-top: 1px solid crimson;
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.6em; }
+      nav a { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BERSERK: L’Oscurità Avanza</h1>
+    <p>Documentazione tecnica e narrativa del gioco testuale</p>
+  </header>
+
+  <nav>
+    <a href="#intro">Introduzione</a>
+    <a href="#strutture">Strutture Dati</a>
+    <a href="#funzioni">Funzioni</a>
+    <a href="#meccaniche">Meccaniche</a>
+    <a href="#combattimento">Combattimento</a>
+    <a href="#modalita">Modalità</a>
+    <a href="#punteggio">Punteggio</a>
+  </nav>
+
+  <main>
+    <section id="intro">
+      <h2>Introduzione</h2>
+      <p>“BERSERK: L’Oscurità Avanza” è un gioco testuale scritto in linguaggio C, ispirato all’universo dark fantasy di Kentaro Miura. Il protagonista, Guts, affronta una serie di battaglie contro demoni, apostoli e un boss finale, in uno scontro disperato contro l’oscurità.</p>
+    </section>
+
+    <section id="strutture">
+      <h2>Strutture Dati</h2>
+      <p>Il gioco utilizza le seguenti strutture:</p>
+      <ul>
+        <li><strong>Personaggio</strong>: contiene <code>nome</code>, <code>hp</code>, <code>attacco</code> e <code>difesa</code>.</li>
+        <li><strong>Player</strong>: per la classifica. Contiene <code>username</code>, <code>score</code>, <code>games_played</code>.</li>
+      </ul>
+      <pre>
+typedef struct {
+  char nome[50];
+  int hp, attacco, difesa;
+} Personaggio;
+      </pre>
+    </section>
+
+    <section id="funzioni">
+      <h2>Funzioni</h2>
+      <ul>
+        <li><strong>introduzione()</strong>: testo narrativo iniziale.</li>
+        <li><strong>combattimento()</strong>: gestisce il sistema di scontro.</li>
+        <li><strong>crea_apostolo()</strong>, <strong>crea_demone()</strong>, <strong>crea_boss_finale()</strong>: generano i nemici.</li>
+        <li><strong>trova_player()</strong>, <strong>aggiungi_player()</strong>: gestiscono i dati giocatore.</li>
+      </ul>
+    </section>
+
+    <section id="meccaniche">
+      <h2>Meccaniche di Gioco</h2>
+      <ul>
+        <li><strong>Attacca</strong>: danno = attacco - difesa avversario (min 1).</li>
+        <li><strong>Difendi</strong>: raddoppia la difesa per 1 turno.</li>
+        <li><strong>Schiva</strong>: 50% possibilità di evitare il colpo.</li>
+        <li><strong>Berserker Mode</strong>: se HP &lt; 20, attacco ×2, difesa ÷2.</li>
+      </ul>
+    </section>
+
+    <section id="combattimento">
+      <h2>Sistema di Combattimento</h2>
+      <p>Ogni combattimento si svolge a turni. Il giocatore sceglie un'azione tra attacco, difesa o schivata. I danni sono calcolati considerando le statistiche base e modificatori temporanei. Alla fine di ogni turno, se il nemico è ancora vivo, contrattacca con la stessa logica.</p>
+      <pre>
+Scelte del giocatore:
+1. Attacco → danno = attacco_gioco - difesa_nemico
+2. Difesa → difesa *= 2
+3. Schivata → rand % 2 == 0 → schivato
+
+Berserker Mode:
+if (hp < 20) {
+  attacco *= 2;
+  difesa /= 2;
+}
+      </pre>
+    </section>
+
+    <section id="modalita">
+      <h2>Modalità</h2>
+      <p>Tre modalità disponibili:</p>
+      <ul>
+        <li><strong>Facile</strong>: 1 demone semplice.</li>
+        <li><strong>Normale</strong>: 2 nemici progressivi.</li>
+        <li><strong>Difficile</strong>: boss finale, nemici potenziati, punteggio aumentato.</li>
+      </ul>
+    </section>
+
+    <section id="punteggio">
+      <h2>Punteggio</h2>
+      <ul>
+        <li>+100 punti per nemico sconfitto</li>
+        <li>+500 in modalità difficile</li>
+        <li>+1000 per vittoria finale</li>
+      </ul>
+    </section>
+
+    <div class="cta">
+      <a href="https://biagio-scaglia.github.io/berserk-game/" target="_blank">🎮 Gioca Ora</a>
+    </div>
+  </main>
+
+  <footer>
+    Progetto creato da Biagio Scaglia – <a href="https://biagioscaglia.com" style="color: crimson;">biagioscaglia.com</a>
+  </footer>
+</body>
+</html>
